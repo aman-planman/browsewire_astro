@@ -1,0 +1,60 @@
+version: "3.9"
+
+services:
+  directus:
+    image: directus/directus:latest
+    container_name: directus
+    restart: always
+    ports:
+      - "8055:8055"
+
+    environment:
+      KEY: "dde0c0e534f2534d980c1b1ccbffade9a99beaa7646148a0efd23660795ce4c7"
+      SECRET: "b664fe9697f16cd065a688b1de334dea4fffd15f6b60f8363b394be98be64d3c"
+
+      PUBLIC_URL: "http://localhost:8055"
+
+      ADMIN_EMAIL: "aman@planman.in"
+      ADMIN_PASSWORD: "StrongPass123"
+
+      DB_CLIENT: "pg"
+      DB_HOST: "postgres"
+      DB_PORT: 5432
+      DB_DATABASE: "directus_db"
+      DB_USER: "directus_user"
+      DB_PASSWORD: "StrongPass123"
+
+      REDIS_HOST: "redis"
+      REDIS_PORT: 6379
+
+      CORS_ENABLED: "true"
+      CORS_ORIGIN: "*"
+      CORS_METHODS: "GET,POST,PUT,PATCH,DELETE,OPTIONS"
+      CORS_ALLOWED_HEADERS: "Content-Type,Authorization"
+      CORS_CREDENTIALS: "false"
+
+    volumes:
+      - ./uploads:/directus/uploads
+      - ./extensions:/directus/extensions
+
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:15
+    container_name: directus_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: "directus_db"
+      POSTGRES_USER: "directus_user"
+      POSTGRES_PASSWORD: "StrongPass123"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    container_name: directus_redis
+    restart: always
+    volumes:
+      - ./redis_data:/data
