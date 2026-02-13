@@ -1,0 +1,466 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+
+export async function getStaticPaths() {
+    return [
+        { params: { slug: "website-development" } },
+        { params: { slug: "mobile-app" } },
+        { params: { slug: "seo-marketing" } },
+    ];
+}
+
+const { slug } = Astro.params;
+---
+
+<BaseLayout title="O-Tech || Service">
+    <Header />
+
+    <main>
+        <!--================= Banner section start =================-->
+        <section
+            class="vl-breadcrumb-bg p-relative z-index-1 fix pt-200 pb--70"
+            style="background-image: url(/assets/img/banner/vl-breadcrumb-bg.png);"
+        >
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-md-6 mb-30">
+                        <div class="vl-breadcrumb">
+                            <h1 class="vl-fs-60 vl-white">{slug}</h1>
+                            <div class="vl-breadcrumb-list">
+                                <span><a href="/">Home</a></span>
+                                <span class="dvir"
+                                    ><i class="fa-solid fa-angle-right"
+                                    ></i></span
+                                >
+                                <span class="active"
+                                    ><a href="#">{slug}</a></span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-md-6 mb-30">
+                        <div class="vl-hero-img p-relative">
+                            <div class="vl-hero-shape-4">
+                                <div class="vl-shape-2">
+                                    <img
+                                        src="/assets/img/icons/vl-emoji-4.2.svg"
+                                        alt=""
+                                    />
+                                </div>
+                                <div class="vl-shape-3">
+                                    <img
+                                        src="/assets/img/icons/vl-emoji-4.3.svg"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                            <div class="vl-breadcrumb-fan">
+                                <img
+                                    class="w-100"
+                                    src="/assets/img/icons/vl-fan-sm.svg"
+                                    alt=""
+                                />
+                            </div>
+                            <div class="vl-breadcrumb-img">
+                                <img
+                                    src="/assets/img/banner/vl-breadcrumb-1.png"
+                                    alt=""
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--================= Banner section End =================-->
+
+        <!--================= Service section start =================-->
+        <section class="vl-service-area pt-100 pb-70">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mb-30">
+                        <div
+                            class="vl-service-icon-box-4 vl-service-icon-box-4-bg vl-gray-bg-4 p-relative z-index-1 fix br-8"
+                        >
+                            <div class="vl-service-icon-box-4-icon4">
+                                <span
+                                    ><img
+                                        src="/assets/img/icons/vl-ser-ic-4.11.svg"
+                                        alt=""
+                                    /></span
+                                >
+                            </div>
+                            <div class="vl-service-icon-box-4-content4">
+                                <h3
+                                    class="vl-service-icon-box-4-title pt-32 pb-16"
+                                >
+                                    <a href="#">Cloud Computing Solutions</a>
+                                </h3>
+                                <p class="pb-24">
+                                    Leverage the power cloud to enhance <br /> scalability,
+                                    flexibility, and performance <br />Our cloud
+                                    computing solutions secure.
+                                </p>
+                                <a href="#" class="readmore"
+                                    >Learn More <span
+                                        ><i class="fa-regular fa-arrow-right"
+                                        ></i></span
+                                    ></a
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-30">
+                        <div
+                            class="vl-service-icon-box-4 vl-service-icon-box-4-bg vl-gray-bg-4 p-relative z-index-1 fix br-8"
+                        >
+                            <div class="vl-service-icon-box-4-icon4">
+                                <span
+                                    ><img
+                                        src="/assets/img/icons/vl-ser-ic-4.22.svg"
+                                        alt=""
+                                    /></span
+                                >
+                            </div>
+                            <div class="vl-service-icon-box-4-content4">
+                                <h3
+                                    class="vl-service-icon-box-4-title pt-32 pb-16"
+                                >
+                                    <a href="#">IT Infrastructure Management</a>
+                                </h3>
+                                <p class="pb-24">
+                                    Optimize your business operations with <br
+                                    /> reliable IT infrastructure management <br
+                                    /> From network setup to hardware.
+                                </p>
+                                <a href="#" class="readmore"
+                                    >Learn More <span
+                                        ><i class="fa-regular fa-arrow-right"
+                                        ></i></span
+                                    ></a
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-30">
+                        <div
+                            class="vl-service-icon-box-4 vl-service-icon-box-4-bg vl-gray-bg-4 p-relative z-index-1 fix br-8"
+                        >
+                            <div class="vl-service-icon-box-4-icon4">
+                                <span
+                                    ><img
+                                        src="/assets/img/icons/vl-ser-ic-4.3.svg"
+                                        alt=""
+                                    /></span
+                                >
+                            </div>
+                            <div class="vl-service-icon-box-4-content4">
+                                <h3
+                                    class="vl-service-icon-box-4-title pt-32 pb-16"
+                                >
+                                    <a href="#">Cybersecurity Services</a>
+                                </h3>
+                                <p class="pb-24">
+                                    In today's digital world, protecting your <br
+                                    /> data is more critical than ever. Our Best <br
+                                    /> comprehensive cybersecurity services.
+                                </p>
+                                <a href="#" class="readmore"
+                                    >Learn More <span
+                                        ><i class="fa-regular fa-arrow-right"
+                                        ></i></span
+                                    ></a
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-30">
+                        <div
+                            class="vl-service-icon-box-4 vl-service-icon-box-4-bg vl-gray-bg-4 p-relative z-index-1 fix br-8"
+                        >
+                            <div class="vl-service-icon-box-4-icon4">
+                                <span
+                                    ><img
+                                        src="/assets/img/icons/vl-ser-ic-4.4.svg"
+                                        alt=""
+                                    /></span
+                                >
+                            </div>
+                            <div class="vl-service-icon-box-4-content4">
+                                <h3
+                                    class="vl-service-icon-box-4-title pt-32 pb-16"
+                                >
+                                    <a href="#">IT Consulting & Strategy</a>
+                                </h3>
+                                <p class="pb-24">
+                                    Achieve your business goal with expert <br
+                                    /> IT consulting and strategy services Our <br
+                                    />consultants work with you to identify.
+                                </p>
+                                <a href="#" class="readmore"
+                                    >Learn More <span
+                                        ><i class="fa-regular fa-arrow-right"
+                                        ></i></span
+                                    ></a
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-30">
+                        <div
+                            class="vl-service-icon-box-4 vl-service-icon-box-4-bg vl-gray-bg-4 p-relative z-index-1 fix br-8"
+                        >
+                            <div class="vl-service-icon-box-4-icon4">
+                                <span
+                                    ><img
+                                        src="/assets/img/icons/vl-ser-ic-4.5.svg"
+                                        alt=""
+                                    /></span
+                                >
+                            </div>
+                            <div class="vl-service-icon-box-4-content4">
+                                <h3
+                                    class="vl-service-icon-box-4-title pt-32 pb-16"
+                                >
+                                    <a href="#">Managed IT Services</a>
+                                </h3>
+                                <p class="pb-24">
+                                    Focus on your core business while we <br /> manage
+                                    your IT operation our managed <br /> services
+                                    include 24/7 monitoring.
+                                </p>
+                                <a href="#" class="readmore"
+                                    >Learn More <span
+                                        ><i class="fa-regular fa-arrow-right"
+                                        ></i></span
+                                    ></a
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-30">
+                        <div
+                            class="vl-service-icon-box-4 vl-service-icon-box-4-bg vl-gray-bg-4 p-relative z-index-1 fix br-8"
+                        >
+                            <div class="vl-service-icon-box-4-icon4">
+                                <span
+                                    ><img
+                                        src="/assets/img/icons/vl-ser-ic-4.6.svg"
+                                        alt=""
+                                    /></span
+                                >
+                            </div>
+                            <div class="vl-service-icon-box-4-content4">
+                                <h3
+                                    class="vl-service-icon-box-4-title pt-32 pb-16"
+                                >
+                                    <a href="#">Network Design & Security</a>
+                                </h3>
+                                <p class="pb-24">
+                                    Create a robust and secure network <br /> infrastructure
+                                    with our design security <br /> services we develop
+                                    networks that.
+                                </p>
+                                <a href="#" class="readmore"
+                                    >Learn More <span
+                                        ><i class="fa-regular fa-arrow-right"
+                                        ></i></span
+                                    ></a
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-30">
+                        <div
+                            class="vl-service-icon-box-4 vl-service-icon-box-4-bg vl-gray-bg-4 p-relative z-index-1 fix br-8"
+                        >
+                            <div class="vl-service-icon-box-4-icon4">
+                                <span
+                                    ><img
+                                        src="/assets/img/icons/vl-ser-ic-4.11.svg"
+                                        alt=""
+                                    /></span
+                                >
+                            </div>
+                            <div class="vl-service-icon-box-4-content4">
+                                <h3
+                                    class="vl-service-icon-box-4-title pt-32 pb-16"
+                                >
+                                    <a href="#">Cloud Solutions</a>
+                                </h3>
+                                <p class="pb-24">
+                                    Leverage the power of the cloud to <br /> streamline
+                                    your operations and boost <br />scalability
+                                    our cloud solutions offer.
+                                </p>
+                                <a href="#" class="readmore"
+                                    >Learn More <span
+                                        ><i class="fa-regular fa-arrow-right"
+                                        ></i></span
+                                    ></a
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-30">
+                        <div
+                            class="vl-service-icon-box-4 vl-service-icon-box-4-bg vl-gray-bg-4 p-relative z-index-1 fix br-8"
+                        >
+                            <div class="vl-service-icon-box-4-icon4">
+                                <span
+                                    ><img
+                                        src="/assets/img/icons/vl-ser-ic-4.22.svg"
+                                        alt=""
+                                    /></span
+                                >
+                            </div>
+                            <div class="vl-service-icon-box-4-content4">
+                                <h3
+                                    class="vl-service-icon-box-4-title pt-32 pb-16"
+                                >
+                                    <a href="#">Cybersecurity Services</a>
+                                </h3>
+                                <p class="pb-24">
+                                    Protect your business from evolving <br /> cyber
+                                    threats with our comprehensive <br
+                                    />cybersecurity solutions From threat.
+                                </p>
+                                <a href="#" class="readmore"
+                                    >Learn More <span
+                                        ><i class="fa-regular fa-arrow-right"
+                                        ></i></span
+                                    ></a
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-30">
+                        <div
+                            class="vl-service-icon-box-4 vl-service-icon-box-4-bg vl-gray-bg-4 p-relative z-index-1 fix br-8"
+                        >
+                            <div class="vl-service-icon-box-4-icon4">
+                                <span
+                                    ><img
+                                        src="/assets/img/icons/vl-ser-ic-4.3.svg"
+                                        alt=""
+                                    /></span
+                                >
+                            </div>
+                            <div class="vl-service-icon-box-4-content4">
+                                <h3
+                                    class="vl-service-icon-box-4-title pt-32 pb-16"
+                                >
+                                    <a href="#">Software Development</a>
+                                </h3>
+                                <p class="pb-24">
+                                    Transform your ideas into reality with <br
+                                    /> our custom software development <br
+                                    />services whether you need mobile.
+                                </p>
+                                <a href="#" class="readmore"
+                                    >Learn More <span
+                                        ><i class="fa-regular fa-arrow-right"
+                                        ></i></span
+                                    ></a
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--================= Service section End =================-->
+
+        <!--================= Choose section start =================-->
+        <section class="vl-about-choose vl-gray-bg-4 pt-100 pb-70 p-relative">
+            <div class="container">
+                <div class="vl-section-title-wrapper mb-60">
+                    <h4 class="vl-section-subtitle-7 vl-upper">
+                        Why choose us
+                    </h4>
+                    <h2 class="vl-section-title vl-section-title-2 pt-16">
+                        We Don't Just Deliver Solutions <br /> We Build Partnerships
+                    </h2>
+                </div>
+            </div>
+        </section>
+        <!--================= Choose section end =================-->
+
+        <!--================= Cta section start =================-->
+        <section class="vl-cta">
+            <div class="container">
+                <div
+                    class="vl-cta-bg-1 vl-cta-bg-4 p-relative fix br-8 pt-80 pb-50"
+                >
+                    <div class="vl-cta-shape">
+                        <img
+                            src="/assets/img/icons/vl-cta-shape-4.1.svg"
+                            alt=""
+                        />
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="vl-cta-wrapper mb-30">
+                                <h2 class="vl-cta-wrapper-title vl-white pb-32">
+                                    Transform Your Business Contact Us Today
+                                </h2>
+
+                                <div class="vl-cta-mailform">
+                                    <form action="#">
+                                        <div class="vl-cta-mail">
+                                            <input
+                                                type="email"
+                                                placeholder="Email Address"
+                                            />
+                                            <div class="vl-cta-mail-btn">
+                                                <div
+                                                    class="vl-herobtn vl-aboutbtn vl-upper"
+                                                >
+                                                    <button
+                                                        class="theme-btn theme-btn2 vl-upper"
+                                                        >Subscribe Now <span
+                                                            ><i
+                                                                class="fa-regular fa-arrow-right"
+                                                            ></i></span
+                                                        ></button
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="vl-cta-img p-relative z-index-1">
+                                <img
+                                    src="/assets/img/cta/vl-cta-main-4.1.png"
+                                    alt=""
+                                />
+                                <div class="vl-cta-half-circle">
+                                    <img
+                                        src="/assets/img/shape/vl-cta-iner-shape.png"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--================= Cta section End =================-->
+    </main>
+
+    <Footer />
+</BaseLayout>

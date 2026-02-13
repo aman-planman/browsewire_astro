@@ -3,19 +3,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
+// type Hero = {
+//   id: number;
+//   title: string;
+//   subtitle: string;
+// };
 
-type Hero = {
-  id: number;
-  title: string;
-  subtitle: string;
-};
-
-const res = await fetch('http://localhost:8055/items/hero_section?fields=*,image.*');
+const res = await fetch(
+    "http://localhost:8055/items/hero_section?fields=*,image.*",
+);
 const json = await res.json();
 
 const hero = json.data;
-
-
 ---
 
 <BaseLayout title="O-Tech">
@@ -24,135 +23,141 @@ const hero = json.data;
     <main>
         <!--================= Banner section start =================-->
 
-        {hero.map((item) => (
-        <section
-            class="vl-hero-area vl-hero-area-4 vl-hero-bg p-relative z-index-1 fix pt-190 pb-70"
-            style="background-image: url(/assets/img/banner/vl-hero-bg-4.1.png);"
-        >
+        {
+            hero &&
+                hero.length > 0 &&
+                hero.map((item: any) => (
+                    <section
+                        class="vl-hero-area vl-hero-area-4 vl-hero-bg p-relative z-index-1 fix pt-190 pb-70"
+                        style="background-image: url(/assets/img/banner/vl-hero-bg-4.1.png);"
+                    >
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xl-6 mb-30">
+                                    <div class="vl-hero-content p-relative z-index-1">
+                                        <div class="vl-section-title-wrapper">
+                                            <h4 class="vl-section-subtitle-5 vl-white vl-upper">
+                                                {item.subtitle}
+                                            </h4>
+                                            <h1 class="vl-section-heading vl-section-heading-2 vl-white pt-16">
+                                                {item.title}
+                                            </h1>
+                                            <p class="vl-section-description pt-16 pb-28">
+                                                {item.description}
+                                            </p>
+                                        </div>
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-6 mb-30">
-                        <div class="vl-hero-content p-relative z-index-1">
-                            <div class="vl-section-title-wrapper">
-                                <h4
-                                    class="vl-section-subtitle-5 vl-white vl-upper"
-                                >
-                                    {item.subtitle}
-                                </h4>
-                                <h1
-                                    class="vl-section-heading vl-section-heading-2 vl-white pt-16"
-                                >
-                                     {item.title}
-                                </h1>
-                                <p class="vl-section-description pt-16 pb-28">
-                                    {item.description}
-                                </p>
-                            </div>
+                                        <div class="vl-btns mb-60">
+                                            <div class="vl-herobtn vl-upper">
+                                                <a href="#" class="theme-btn">
+                                                    Book a Free Consultation
+                                                    <span>
+                                                        <i class="fa-regular fa-arrow-right" />
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </div>
 
-                            <div class="vl-btns mb-60">
-                                <div class="vl-herobtn vl-upper">
-                                    <a href="#" class="theme-btn"
-                                        >Book a Free Consultation<span
-                                            ><i
-                                                class="fa-regular fa-arrow-right"
-                                            ></i></span
-                                        ></a
-                                    >
+                                        <div class="vl-hero-counter">
+                                            <div class="vl-hero-counter-box mb-30">
+                                                <>
+                                                    <span class="counter vl-white">
+                                                        90
+                                                    </span>
+                                                    <span>k</span>
+                                                </>
+                                                <h4 class="vl-hero-counter-box-title vl-white pt-12">
+                                                    Happy Client
+                                                </h4>
+                                            </div>
+                                            <div class="vl-hero-counter-box mb-30">
+                                                <>
+                                                    <span class="counter vl-white">
+                                                        650
+                                                    </span>
+                                                    <span>+</span>
+                                                </>
+                                                <h4 class="vl-hero-counter-box-title vl-white pt-12">
+                                                    Total Projects
+                                                </h4>
+                                            </div>
+
+                                            <div class="vl-hero-counter-box mb-30">
+                                                <>
+                                                    <span class="counter vl-white">
+                                                        85
+                                                    </span>
+                                                    <span>+</span>
+                                                </>
+                                                <h4 class="vl-hero-counter-box-title vl-white pt-12">
+                                                    Work Together
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="vl-hero-counter">
-                                <div class="vl-hero-counter-box mb-30">
-                                    <span class="counter vl-white">90</span
-                                    ><span>k</span>
-                                    <h4
-                                        class="vl-hero-counter-box-title vl-white pt-12"
-                                    >
-                                        Happy Client
-                                    </h4>
-                                </div>
-                                <div class="vl-hero-counter-box mb-30">
-                                    <span class="counter vl-white">650</span
-                                    ><span>+</span>
-                                    <h4
-                                        class="vl-hero-counter-box-title vl-white pt-12"
-                                    >
-                                        Total Projects
-                                    </h4>
-                                </div>
-
-                                <div class="vl-hero-counter-box mb-30">
-                                    <span class="counter vl-white">85</span
-                                    ><span>+</span>
-                                    <h4
-                                        class="vl-hero-counter-box-title vl-white pt-12"
-                                    >
-                                        Work Together
-                                    </h4>
+                                <div class="col-xl-6 mb-30">
+                                    <div class="vl-hero-img p-relative">
+                                        <div class="vl-hero-shape-4">
+                                            <div class="vl-shape-1">
+                                                <img
+                                                    src="/assets/img/icons/vl-emoji-4.1.svg"
+                                                    alt=""
+                                                />
+                                            </div>
+                                            <div class="vl-shape-2">
+                                                <img
+                                                    src="/assets/img/icons/vl-emoji-4.2.svg"
+                                                    alt=""
+                                                />
+                                            </div>
+                                            <div class="vl-shape-3">
+                                                <img
+                                                    src="/assets/img/icons/vl-emoji-4.3.svg"
+                                                    alt=""
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="vl-hero-fan">
+                                            <img
+                                                class="w-100"
+                                                src="/assets/img/icons/vl-fan.svg"
+                                                alt=""
+                                            />
+                                        </div>
+                                        <div class="vl-hero-img-4">
+                                            <img
+                                                class="w-100"
+                                                src="/assets/img/banner/vl-hero-4.1.webp"
+                                                alt=""
+                                            />
+                                        </div>
+                                        <div class="vl-hero-img-4-content">
+                                            <h3 class="vl-hero-img-4-title pb-20">
+                                                Worked With More Than <br />{" "}
+                                                100+ Technology
+                                            </h3>
+                                            <div class="vl-hero-img-4-grup">
+                                                <div class="vl-hero-img-4-grup-img">
+                                                    <img
+                                                        src="/assets/img/banner/vl-hero-group.png"
+                                                        alt=""
+                                                    />
+                                                </div>
+                                                <div class="vl-hero-img-4-grup-content">
+                                                    <h4>
+                                                        100+ <br /> Clients
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xl-6 mb-30">
-                        <div class="vl-hero-img p-relative">
-                            <div class="vl-hero-shape-4">
-                                <div class="vl-shape-1">
-                                    <img
-                                        src="/assets/img/icons/vl-emoji-4.1.svg"
-                                        alt=""
-                                    />
-                                </div>
-                                <div class="vl-shape-2">
-                                    <img
-                                        src="/assets/img/icons/vl-emoji-4.2.svg"
-                                        alt=""
-                                    />
-                                </div>
-                                <div class="vl-shape-3">
-                                    <img
-                                        src="/assets/img/icons/vl-emoji-4.3.svg"
-                                        alt=""
-                                    />
-                                </div>
-                            </div>
-                            <div class="vl-hero-fan">
-                                <img
-                                    class="w-100"
-                                    src="/assets/img/icons/vl-fan.svg"
-                                    alt=""
-                                />
-                            </div>
-                            <div class="vl-hero-img-4">
-                                <img
-                                    class="w-100"
-                                    src="/assets/img/banner/vl-hero-4.1.webp"
-                                    alt=""
-                                />
-                            </div>
-                            <div class="vl-hero-img-4-content">
-                                <h3 class="vl-hero-img-4-title pb-20">
-                                    Worked With More Than <br /> 100+ Technology
-                                </h3>
-                                <div class="vl-hero-img-4-grup">
-                                    <div class="vl-hero-img-4-grup-img">
-                                        <img
-                                            src="/assets/img/banner/vl-hero-group.png"
-                                            alt=""
-                                        />
-                                    </div>
-                                    <div class="vl-hero-img-4-grup-content">
-                                        <h4>100+ <br /> Clients</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        ))}
+                    </section>
+                ))
+        }
 
         <!--================= Banner section End =================-->
 
@@ -171,15 +176,12 @@ const hero = json.data;
                             <div class="vl-about-large4">
                                 <img
                                     class="w-100"
-                                    src="/assets/img/about/vl-about-4.1.png"
+                                    src="/assets/img/cs_img9.jpg"
                                     alt=""
                                 />
                             </div>
                             <div class="vl-about-sm-2 d-none d-md-block">
-                                <img
-                                    src="/assets/img/about/vl-about-top-sm-4.2.png"
-                                    alt=""
-                                />
+                                <img src="/assets/img/cs_image1.png" alt="" />
                             </div>
 
                             <div
