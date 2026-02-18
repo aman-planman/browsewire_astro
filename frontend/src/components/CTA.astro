@@ -1,0 +1,117 @@
+---
+const res = await fetch(
+    "http://localhost:8055/items/cta?fields=id,heading,cta_image",
+);
+const json = await res.json();
+const cta = json.data[0];
+
+
+
+
+---
+
+<section class="vl-cta">
+    <div class="container">
+        <div class="vl-cta-bg-1 vl-cta-bg-4 p-relative fix br-8 pt-80 pb-50">
+            <div class="vl-cta-shape">
+                <img src="/assets/img/icons/vl-cta-shape-4.1.svg" alt="" />
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="vl-cta-wrapper mb-30">
+                        <h2 class="vl-cta-wrapper-title vl-white pb-32">
+                            {cta.heading}
+                        </h2>
+
+                        <div class="vl-cta-mailform">
+                            <form method="POST" action="" id="ctaForm">
+                                <div class="vl-cta-mail">
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        placeholder="Email Address"
+                                    />
+                                    <div class="vl-cta-mail-btn">
+                                        <div
+                                            class="vl-herobtn vl-aboutbtn vl-upper"
+                                        >
+                                            <button
+                                                type="submit"
+                                                class="theme-btn theme-btn2 vl-upper"
+                                                >Subscribe Now <span
+                                                    ><i
+                                                        class="fa-regular fa-arrow-right"
+                                                    ></i></span
+                                                ></button
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="vl-cta-img p-relative z-index-1">
+                        <img src="/assets/img/cs_img6.webp" alt="" />
+                        <div class="vl-cta-half-circle">
+                            <img src="/assets/img/cs_image2.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script type="module">
+    import { useEffect } from 'react';
+
+    let cta = null;
+
+    useEffect(async () => {
+        cta = await fetchCtaData();
+    }, []);
+
+    const form = document.getElementById('ctaForm');
+
+    form?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const emailInput = document.getElementById('email');
+        const email = emailInput?.value.trim();
+        
+        if (!email) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+
+        const ctaData = {
+            cta_id: cta?.id,
+            cta_image: cta?.cta_image,
+            email: email,
+        };
+
+        try {
+            const response = await fetch('http://localhost:8055/items/email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(ctaData),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                alert('Thank you for subscribing!');
+            } else {
+                alert('There was an error submitting your email.');
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            alert('An unexpected error occurred.');
+        }
+    });
+</script>

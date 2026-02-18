@@ -2,14 +2,33 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
+import CTA from "../../components/CTA.astro";
+import SecondaryBanner from "../../components/Secondary_banner.astro";
+
+let data = [];
+let hasError = false;
+
+try {
+    // Services
+    const ser = await fetch("http://localhost:8055/items/services");
+
+    if (!ser.ok) throw new Error("Services fetch failed");
+
+    const ser_data = await ser.json();
+    data = ser_data.data;
+} catch (error) {
+    console.error("API Error:", error);
+    hasError = true;
+}
 ---
 
-<BaseLayout title="O-Tech || Service">
+<BaseLayout title="O-Code | Service">
     <Header />
 
     <main>
         <!--================= Banner section start =================-->
-        <section
+
+        <!-- <section
             class="vl-breadcrumb-bg p-relative z-index-1 fix pt-200 pb--70"
             style="background-image: url(/assets/img/banner/vl-breadcrumb-bg.png);"
         >
@@ -17,7 +36,7 @@ import Footer from "../../components/Footer.astro";
                 <div class="row">
                     <div class="col-xl-6 col-md-6 mb-30">
                         <div class="vl-breadcrumb">
-                            <h1 class="vl-fs-60 vl-white">Our Service</h1>
+                            <h1 class="vl-fs-60 vl-white">{slug}</h1>
                             <div class="vl-breadcrumb-list">
                                 <span><a href="/">Home</a></span>
                                 <span class="dvir"
@@ -25,7 +44,9 @@ import Footer from "../../components/Footer.astro";
                                     ></i></span
                                 >
                                 <span class="active"
-                                    ><a href="#">Our Service</a></span
+                                    >
+                                    <a href="#">{slug}</a>
+                                    </span
                                 >
                             </div>
                         </div>
@@ -63,47 +84,57 @@ import Footer from "../../components/Footer.astro";
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
+
+        <SecondaryBanner title="Our Services" />
+
         <!--================= Banner section End =================-->
 
         <!--================= Service section start =================-->
         <section class="vl-service-area pt-100 pb-70">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 mb-30">
-                        <div
-                            class="vl-service-icon-box-4 vl-service-icon-box-4-bg vl-gray-bg-4 p-relative z-index-1 fix br-8"
-                        >
-                            <div class="vl-service-icon-box-4-icon4">
-                                <span
-                                    ><img
-                                        src="/assets/img/icons/vl-ser-ic-4.11.svg"
-                                        alt=""
-                                    /></span
-                                >
-                            </div>
-                            <div class="vl-service-icon-box-4-content4">
-                                <h3
-                                    class="vl-service-icon-box-4-title pt-32 pb-16"
-                                >
-                                    <a href="#">Cloud Computing Solutions</a>
-                                </h3>
-                                <p class="pb-24">
-                                    Leverage the power cloud to enhance <br /> scalability,
-                                    flexibility, and performance <br />Our cloud
-                                    computing solutions secure.
-                                </p>
-                                <a href="#" class="readmore"
-                                    >Learn More <span
-                                        ><i class="fa-regular fa-arrow-right"
-                                        ></i></span
-                                    ></a
-                                >
-                            </div>
-                        </div>
-                    </div>
+                    {
+                        data &&
+                            data.length > 0 &&
+                            data.map((item: any) => (
+                                <div class="col-lg-4 col-md-6 mb-30">
+                                    <div class="vl-service-icon-box-4 vl-service-icon-box-4-bg vl-gray-bg-4 p-relative z-index-1 fix br-8">
+                                        <div class="vl-service-icon-box-4-icon4">
+                                            <span>
+                                                <img
+                                                    src="/assets/img/icons/vl-ser-ic-4.11.svg"
+                                                    alt=""
+                                                />
+                                            </span>
+                                        </div>
+                                        <div class="vl-service-icon-box-4-content4">
+                                            <h3 class="vl-service-icon-box-4-title pt-32 pb-16">
+                                                <a href={`/services/${item.slug}`}>
+                                                    {item.heading}
+                                                </a>
+                                            </h3>
+                                            <p class="pb-24">
+                                                Leverage the power cloud to
+                                                enhance <br /> scalability,
+                                                flexibility, and performance{" "}
+                                                <br />
+                                                Our cloud computing solutions
+                                                secure.
+                                            </p>
+                                            <a href={`/services/${item.slug}`} class="readmore">
+                                                Learn More{" "}
+                                                <span>
+                                                    <i class="fa-regular fa-arrow-right" />
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                    }
 
-                    <div class="col-lg-4 col-md-6 mb-30">
+                    <!-- <div class="col-lg-4 col-md-6 mb-30">
                         <div
                             class="vl-service-icon-box-4 vl-service-icon-box-4-bg vl-gray-bg-4 p-relative z-index-1 fix br-8"
                         >
@@ -365,10 +396,11 @@ import Footer from "../../components/Footer.astro";
                                 >
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </section>
+
         <!--================= Service section End =================-->
 
         <!--================= Choose section start =================-->
@@ -382,12 +414,119 @@ import Footer from "../../components/Footer.astro";
                         We Don't Just Deliver Solutions <br /> We Build Partnerships
                     </h2>
                 </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="p-relative z-index-1">
+                            <div class="row">
+                                <div class="col-lg-5 col-md-6">
+                                    <div class="vl-about-choose-img mb-30">
+                                        <img
+                                            class="w-100 img-custom-anim-left"
+                                            src="/assets/img/cs_img9.jpg"
+                                            alt=""
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div
+                                        class="vl-about-choose-img-2 fix br-8 mb-30"
+                                    >
+                                        <img
+                                            class="w-100"
+                                            src="/assets/img/cs_img7.jpg"
+                                            alt=""
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="vl-about-choose-content">
+                                        <p>
+                                            We understand that every business is
+                                            unique, <br />is why we offer
+                                            customized IT solutions that <br /> fit
+                                            your needs perfectly. Our approach rooted
+                                            <br /> in collaboration and innovation,
+                                            ensuring you <br /> receive the best tools
+                                            and strategies.
+                                        </p>
+                                        <div class="vl-about-inner-btn">
+                                            <a
+                                                href="/service"
+                                                class="vl-iner-btn"
+                                                >Learn more <span
+                                                    ><i
+                                                        class="fa-light fa-arrow-right"
+                                                    ></i></span
+                                                ></a
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="vl-hero-counter vl-about-choose-counter"
+                                >
+                                    <div
+                                        class="vl-hero-counter-box vl-about-choose-counter-box mb-30"
+                                    >
+                                        <span class="counter">90</span><span
+                                            >k</span
+                                        >
+                                        <h4
+                                            class="vl-hero-counter-box-title title-2 pt-12"
+                                        >
+                                            Happy Client
+                                        </h4>
+                                    </div>
+                                    <div
+                                        class="vl-hero-counter-box vl-about-choose-counter-box mb-30"
+                                    >
+                                        <span class="counter">650</span><span
+                                            >+</span
+                                        >
+                                        <h4
+                                            class="vl-hero-counter-box-title title-2 pt-12"
+                                        >
+                                            Total Projects
+                                        </h4>
+                                    </div>
+
+                                    <div
+                                        class="vl-hero-counter-box vl-about-choose-counter-box mb-30"
+                                    >
+                                        <span class="counter">85</span><span
+                                            >+</span
+                                        >
+                                        <h4
+                                            class="vl-hero-counter-box-title title-2 pt-12"
+                                        >
+                                            Work Together
+                                        </h4>
+                                    </div>
+
+                                    <div
+                                        class="vl-hero-counter-box vl-about-choose-counter-box mb-30"
+                                    >
+                                        <span class="counter">12</span><span
+                                            >+</span
+                                        >
+                                        <h4
+                                            class="vl-hero-counter-box-title title-2 pt-12"
+                                        >
+                                            Year of Experience
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         <!--================= Choose section end =================-->
 
         <!--================= Cta section start =================-->
-        <section class="vl-cta">
+        <!-- <section class="vl-cta">
             <div class="container">
                 <div
                     class="vl-cta-bg-1 vl-cta-bg-4 p-relative fix br-8 pt-80 pb-50"
@@ -448,7 +587,9 @@ import Footer from "../../components/Footer.astro";
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
+
+        <CTA />
         <!--================= Cta section End =================-->
     </main>
 

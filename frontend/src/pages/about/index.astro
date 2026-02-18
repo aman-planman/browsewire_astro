@@ -2,16 +2,37 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
+import SecondaryBanner from "../../components/Secondary_banner.astro";
+import CTA from "../../components/CTA.astro";
+
+const apiUrl =
+    "http://localhost:8055/items/pages/2?fields=*,section.*,section.item.*,section.item.button.*";
+
+const res = await fetch(apiUrl);
+if (!res.ok) throw Error("Failed to fetch API data");
+
+const data: { data: any } = await res.json();
+const page = data.data;
+
+// Separate sections into variables by collection
+const aboutUs: any | undefined = page.section.find(
+    (s: any) => s.collection === "about_us_section",
+)?.item;
+
+const mission: any | undefined = page.section.find(
+    (s: any) => s.collection === "mission_section",
+)?.item;
 ---
 
-<BaseLayout title="O-Tech || About">
+<BaseLayout title="O-Code | About">
     <Header />
 
     <main>
         <!--================= Banner section start =================-->
-        <section
+
+        <!-- <section
             class="vl-breadcrumb-bg p-relative z-index-1 fix pt-200 pb--70"
-            style="background-image: url(/assets/img/banner/vl-breadcrumb-bg.png);"
+            style="background-image: url(/assets/img/banner/vl-hero-bg-4.1.png);"
         >
             <div class="container">
                 <div class="row">
@@ -55,7 +76,8 @@ import Footer from "../../components/Footer.astro";
                             </div>
                             <div class="vl-breadcrumb-img">
                                 <img
-                                    src="/assets/img/banner/vl-breadcrumb-1.png"
+                                    src="/assets/img/banner/vl-hero-4.1.webp"
+                                    class="w-50"
                                     alt=""
                                 />
                             </div>
@@ -63,7 +85,10 @@ import Footer from "../../components/Footer.astro";
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
+
+        <SecondaryBanner title="About Us" />
+
         <!--================= Banner section End =================-->
 
         <!--================= About section start =================-->
@@ -73,14 +98,12 @@ import Footer from "../../components/Footer.astro";
                     <div class="col-lg-6 mb-30">
                         <div class="vl-about-imgs mr-60">
                             <div class="vl-about-img-1">
-                                <img
-                                    src="/assets/img/about/vl-about-1.1.png"
-                                    alt=""
-                                />
+                                <img src="/assets/img/cs_img2.jpg" alt="" />
                             </div>
                             <div class="vl-about-img-1 vl-about-img-2">
                                 <img
-                                    src="/assets/img/about/vl-about-1.2.png"
+                                    src="/assets/img/cs_img5.jpg"
+                                    class="object-cover"
                                     alt=""
                                 />
                             </div>
@@ -90,19 +113,15 @@ import Footer from "../../components/Footer.astro";
                         <div class="vl-about-content iner-about">
                             <div class="vl-section-title-wrapper">
                                 <h4 class="vl-section-subtitle-7 vl-upper">
-                                    About us
+                                    {aboutUs.heading}
                                 </h4>
                                 <h2
                                     class="vl-section-title vl-section-title-2 pt-16 pb-20"
                                 >
-                                    Empower Your Business<br /> Every Step of the
-                                    Way
+                                    {aboutUs.subheading}
                                 </h2>
                                 <p class="vl-section-description-2 pb-32">
-                                    Whether it optimizing IT infrastructure,
-                                    enhancing cybersecurity, <br />or driving
-                                    digital transformation, we are committed to
-                                    helping.
+                                    {aboutUs.description}
                                 </p>
                             </div>
 
@@ -118,7 +137,25 @@ import Footer from "../../components/Footer.astro";
                                 <div
                                     class="vl-about-icon-content vl-about-icon-content-2"
                                 >
-                                    <h4 class="vl-about-icon-title pb-16 m-0">
+                                    {
+                                        aboutUs.section_content.map(
+                                            (service: any) => (
+                                                <div class="mb-20">
+                                                    <h4 class="vl-about-icon-title pb-16 m-0">
+                                                        {
+                                                            service.section_heading
+                                                        }
+                                                    </h4>
+                                                    <p class="vl-about-icon-desc m-0">
+                                                        {
+                                                            service.section_description
+                                                        }
+                                                    </p>
+                                                </div>
+                                            ),
+                                        )
+                                    }
+                                    <!-- <h4 class="vl-about-icon-title pb-16 m-0">
                                         Strategic Planning
                                     </h4>
                                     <p class="vl-about-icon-desc m-0">
@@ -127,24 +164,44 @@ import Footer from "../../components/Footer.astro";
                                         in the digital era. Our team experts <br
                                         /> brings deep industry knowledge, cutting-edge
                                         tools.
-                                    </p>
+                                    </p> -->
                                 </div>
                             </div>
 
                             <div class="vl-about-inner-btn">
-                                <a href="#" class="vl-iner-btn"
-                                    >Learn more <span
-                                        ><i class="fa-light fa-arrow-right"
-                                        ></i></span
-                                    ></a
-                                >
+                                {
+                                    aboutUs.button.map((item: any) => (
+                                        <a
+                                            href={`/${item.button_link}`}
+                                            class="vl-iner-btn"
+                                        >
+                                            {item.button_title}{" "}
+                                            <span>
+                                                <i class="fa-light fa-arrow-right" />
+                                            </span>
+                                        </a>
+                                    ))
+                                }
                             </div>
                         </div>
                     </div>
 
                     <div class="col-lg-5 mb-30">
                         <div class="vl-about-inner-box-active">
-                            <div
+                            {
+                                mission.slider_content.map((service: any) => (
+                                    <div class="vl-about-inner-box-content vl-gray-bg-4 p-relative br-8">
+                                        <h3 class="vl-about-inner-box-title pb-16">
+                                            <a href="#">{service.slider_title}</a>
+                                        </h3>
+                                        <p>
+                                           {service.slider_description}
+                                        </p>
+                                    </div>
+                                ))
+                            }
+
+                            <!-- <div
                                 class="vl-about-inner-box-content vl-gray-bg-4 p-relative br-8"
                             >
                                 <h3 class="vl-about-inner-box-title pb-16">
@@ -174,30 +231,14 @@ import Footer from "../../components/Footer.astro";
                                     service, fostering long partnerships, <br /> and
                                     leveraging the latest technologies to help.
                                 </p>
-                            </div>
-
-                            <div
-                                class="vl-about-inner-box-content vl-gray-bg-4 p-relative br-8"
-                            >
-                                <h3 class="vl-about-inner-box-title pb-16">
-                                    <a href="#">Our Mission</a>
-                                </h3>
-                                <p>
-                                    Our mission is to empower businesses through
-                                    best <br /> innovative IT solutions that drive
-                                    growth, efficiency <br /> digital transformation.
-                                    We committed to delivering <br /> exceptional
-                                    service, fostering long partnerships, <br /> and
-                                    leveraging the latest technologies to help.
-                                </p>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="col-lg-7">
                         <div class="vl-about-vido fix p-relative br-8 mb-30">
                             <img
                                 class="w-100"
-                                src="/assets/img/about/vl-video-img.png"
+                                src={`http://localhost:8055/assets/${mission.feature_image}`}
                                 alt=""
                             />
                             <div class="vl-sec-img-vi-4">
@@ -235,7 +276,7 @@ import Footer from "../../components/Footer.astro";
                                     <div class="vl-about-choose-img mb-30">
                                         <img
                                             class="w-100 img-custom-anim-left"
-                                            src="/assets/img/about/vl-about-choose-1.png"
+                                            src="/assets/img/cs_img9.jpg"
                                             alt=""
                                         />
                                     </div>
@@ -246,7 +287,7 @@ import Footer from "../../components/Footer.astro";
                                     >
                                         <img
                                             class="w-100"
-                                            src="/assets/img/about/vl-about-choose-2.png"
+                                            src="/assets/img/cs_img7.jpg"
                                             alt=""
                                         />
                                     </div>
@@ -339,7 +380,8 @@ import Footer from "../../components/Footer.astro";
         <!--================= Choose section end =================-->
 
         <!--================= Cta section start =================-->
-        <section class="vl-cta">
+
+        <!-- <section class="vl-cta">
             <div class="container">
                 <div
                     class="vl-cta-bg-1 vl-cta-bg-4 p-relative fix br-8 pt-80 pb-50"
@@ -400,7 +442,10 @@ import Footer from "../../components/Footer.astro";
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
+
+        <CTA />
+
         <!--================= Cta section End =================-->
     </main>
 

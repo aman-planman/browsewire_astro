@@ -1,0 +1,66 @@
+---
+import { formatSlug } from "../utils/formatSlug";
+
+
+const { title } = Astro.props;
+
+const formattedTitle = formatSlug(title);
+---
+ 
+ 
+ <section
+            class="vl-breadcrumb-bg p-relative z-index-1 fix pt-200 pb--70"
+            style="background-image: url(/assets/img/banner/vl-hero-bg-4.1.png);"
+        >
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-md-6 mb-30">
+                        <div class="vl-breadcrumb">
+                            <h1 class="vl-fs-60 vl-white">{formattedTitle}</h1>
+                            <div class="vl-breadcrumb-list">
+                                <span><a href="/">Home</a></span>
+                                <span class="dvir"
+                                    ><i class="fa-solid fa-angle-right"
+                                    ></i></span
+                                >
+                                <span class="active"
+                                    ><a href="#">{formattedTitle}</a></span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-md-6 mb-30">
+                        <div class="vl-hero-img p-relative">
+                            <div class="vl-hero-shape-4">
+                                <div class="vl-shape-2">
+                                    <img
+                                        src="/assets/img/icons/vl-emoji-4.2.svg"
+                                        alt=""
+                                    />
+                                </div>
+                                <div class="vl-shape-3">
+                                    <img
+                                        src="/assets/img/icons/vl-emoji-4.3.svg"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                            <div class="vl-breadcrumb-fan">
+                                <img
+                                    class="w-100"
+                                    src="/assets/img/icons/vl-fan-sm.svg"
+                                    alt=""
+                                />
+                            </div>
+                            <div class="vl-breadcrumb-img">
+                                <img
+                                    src="/assets/img/banner/vl-hero-4.1.webp"
+                                    class="w-50"
+                                    alt=""
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>

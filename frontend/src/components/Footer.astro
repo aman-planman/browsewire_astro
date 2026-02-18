@@ -1,5 +1,9 @@
 ---
-// Footer Component
+const res = await fetch(
+    "http://localhost:8055/items/footer?fields=*,social_links.*,social_links.social_media_id.*,social_posts.*",
+);
+const json = await res.json();
+const data = json.data[0];
 ---
 
 <footer>
@@ -11,16 +15,15 @@
                         <div class="vl-footer-logo">
                             <a href="/"
                                 ><img
-                                    src="/assets/img/logo/vl-footer-logo-4.2.png"
+                                    src={`http://localhost:8055/assets/${data.footer_logo}`}
+                                    class="w-50"
                                     alt=""
                                 /></a
                             >
                         </div>
                         <div class="vl-footer-content vl-footer-content-4">
                             <p class="pt-16 pb-32">
-                                We foster a culture of teamwork & <br /> creative
-                                problem-solving to deliver <br /> exceptional results
-                                for our clients.
+                                {data.footer_description}
                             </p>
                         </div>
                         <div class="vl-footer-social vl-footer-social-4">
@@ -28,22 +31,26 @@
                                 <li>
                                     <a href="#"
                                         ><i class="fa-brands fa-facebook-f"
-                                        ></i></a>
+                                        ></i></a
+                                    >
                                 </li>
+
                                 <li>
                                     <a href="#"
                                         ><i class="fa-brands fa-linkedin-in"
-                                        ></i></a>
+                                        ></i></a
+                                    >
                                 </li>
                                 <li>
                                     <a href="#"
                                         ><i class="fa-brands fa-instagram"
-                                        ></i></a>
+                                        ></i></a
+                                    >
                                 </li>
                                 <li>
                                     <a href="#"
-                                        ><i class="fa-brands fa-youtube"
-                                        ></i></a>
+                                        ><i class="fa-brands fa-youtube"></i></a
+                                    >
                                 </li>
                             </ul>
                         </div>
@@ -56,10 +63,23 @@
                         </h3>
                         <div class="vl-footer-menu vl-footer-menu-4">
                             <ul>
-                                <li><a href="/about/">About Us</a></li>
-                                <li><a href="/service/">Our Service</a></li>
+                                {
+                                    data.quick_links &&
+                                        data.quick_links.length > 0 &&
+                                        data.quick_links.map((link: any) => (
+                                            <li>
+                                                <a href={link.item_link}>
+                                                    {link.list_item}
+                                                </a>
+                                            </li>
+                                        ))
+                                }
+
+                                <!-- <li><a href="/about/">About Us</a></li> -->
+
+                                <!-- <li><a href="/service/">Our Service</a></li>
                                 <li><a href="/case-studies/">Case Study</a></li>
-                                <li><a href="/testimonial/">Testimonial</a></li>
+                                <li><a href="/testimonial/">Testimonial</a></li> -->
                             </ul>
                         </div>
                     </div>
@@ -71,10 +91,23 @@
                         </h3>
                         <div class="vl-footer-menu vl-footer-menu-4">
                             <ul>
-                                <li><a href="#">Cyber Security</a></li>
-                                <li><a href="#">Network Analysis</a></li>
+                                {
+                                    data.our_services &&
+                                        data.our_services.length > 0 &&
+                                        data.our_services.map(
+                                            (service: any) => (
+                                                <li>
+                                                    <a href="#">
+                                                        {service.list_item}
+                                                    </a>
+                                                </li>
+                                            ),
+                                        )
+                                }
+                                <!-- <li><a href="#">Cyber Security</a></li> -->
+                                <!-- <li><a href="#">Network Analysis</a></li>
                                 <li><a href="#">Data Recovery</a></li>
-                                <li><a href="#">It Service</a></li>
+                                <li><a href="#">It Service</a></li> -->
                             </ul>
                         </div>
                     </div>
@@ -85,13 +118,34 @@
                             Instagram Post
                         </h3>
                         <div class="row gx-2">
-                            <div class="col-lg-4 col-md-4 col-4">
+                            {
+                                data.social_posts &&
+                                    data.social_posts.length > 0 &&
+                                    data.social_posts.map((post: any) => (
+                                        <div class="col-lg-4 col-md-4 col-4 cs_footerinstapost">
+                                            <div class="vl-footer-instapost p-relative z-index-1 fix mb-8">
+                                                <img
+                                                    class="w-100"
+                                                    src={`http://localhost:8055/assets/${post.directus_files_id}`}
+                                                    alt="instaqram post"
+                                                />
+                                                <div class="vl-footer-instapost-icon">
+                                                    <a href="#">
+                                                        <i class="fa-brands fa-instagram" />
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))
+                            }
+
+                            <!-- <div class="col-lg-4 col-md-4 col-4">
                                 <div
                                     class="vl-footer-instapost p-relative z-index-1 fix mb-8"
                                 >
                                     <img
                                         class="w-100"
-                                        src="/assets/img/footer/vl-ft-post-3.1.png"
+                                        src="/assets/img/cs_img9.jpg"
                                         alt=""
                                     />
                                     <div class="vl-footer-instapost-icon">
@@ -109,7 +163,7 @@
                                 >
                                     <img
                                         class="w-100"
-                                        src="/assets/img/footer/vl-ft-post-3.2.png"
+                                        src="/assets/img/cs_img8.jpg"
                                         alt=""
                                     />
                                     <div class="vl-footer-instapost-icon">
@@ -127,7 +181,7 @@
                                 >
                                     <img
                                         class="w-100"
-                                        src="/assets/img/footer/vl-ft-post-3.3.png"
+                                        src="/assets/img/cs_img1.jpg"
                                         alt=""
                                     />
                                     <div class="vl-footer-instapost-icon">
@@ -145,7 +199,7 @@
                                 >
                                     <img
                                         class="w-100"
-                                        src="/assets/img/footer/vl-ft-post-3.4.png"
+                                        src="/assets/img/cs_img2.jpg"
                                         alt=""
                                     />
                                     <div class="vl-footer-instapost-icon">
@@ -163,7 +217,7 @@
                                 >
                                     <img
                                         class="w-100"
-                                        src="/assets/img/footer/vl-ft-post-3.5.png"
+                                        src="/assets/img/cs_img4.jpg"
                                         alt=""
                                     />
                                     <div class="vl-footer-instapost-icon">
@@ -174,24 +228,7 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-lg-4 col-md-4 col-4">
-                                <div
-                                    class="vl-footer-instapost p-relative z-index-1 fix mb-8"
-                                >
-                                    <img
-                                        class="w-100"
-                                        src="/assets/img/footer/vl-ft-post-3.6.png"
-                                        alt=""
-                                    />
-                                    <div class="vl-footer-instapost-icon">
-                                        <a href="#"
-                                            ><i class="fa-brands fa-instagram"
-                                            ></i></a
-                                        >
-                                    </div>
-                                </div>
-                            </div>
+                             -->
                         </div>
                     </div>
                 </div>
@@ -205,15 +242,24 @@
                             class="vl-footer-copyright-text vl-footer-copyright-text-4"
                         >
                             <p>
-                                Copyright &copy;2024 O-Tech. All Rights Reserved
+                                {data.copyright_text}
                             </p>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="vl-footer-copyright-menu">
                             <ul>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
+                                {
+                                    data.policy_page_link.map((item: any) => (
+                                        <li>
+                                            <a href={item.page_url}>
+                                                {item.page_name}
+                                            </a>
+                                        </li>
+                                    ))
+                                }
+                                <!-- <li><a href="#">Terms & Conditions</a></li>
+                                <li><a href="#">Privacy Policy</a></li> -->
                             </ul>
                         </div>
                     </div>

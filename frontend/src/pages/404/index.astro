@@ -1,14 +1,16 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import SecondaryBanner from "../../components/Secondary_banner.astro";
+import CTA from "../../components/CTA.astro";
 ---
 
-<BaseLayout title="O-Tech || 404">
-  <Header />
-  
-  <main>
-    <section class="vl-breadcrumb-bg p-relative z-index-1 fix pt-200 pb--70" style="background-image: url(/assets/img/banner/vl-breadcrumb-bg.png);">
+<BaseLayout title="O-Code || 404">
+    <Header />
+
+    <main>
+        <!-- <section class="vl-breadcrumb-bg p-relative z-index-1 fix pt-200 pb--70" style="background-image: url(/assets/img/banner/vl-breadcrumb-bg.png);">
         <div class="container">
             <div class="row">
                 <div class="col-xl-6 col-md-6 mb-30">
@@ -41,19 +43,22 @@ import Footer from '../../components/Footer.astro';
                 </div>
             </div>
         </div>
-    </section>
-
-    <section class="pt-100 pb-70">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="vl-section-title">Welcome to 404</h2>
-                    <p>Content coming soon...</p>
+    </section> -->
+        <SecondaryBanner title="404 Page" />
+        <section class="pt-100 pb-70">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="vl-section-title">Sorry, Page Not Found</h2>
+                        <p>The page you are looking for does not exist or has been moved.</p>
+                        <a href="/" class="vl-btn vl-btn-primary mt-20">Go Back Home</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-  </main>
+        </section>
 
-  <Footer />
+        <CTA />
+    </main>
+
+    <Footer />
 </BaseLayout>
